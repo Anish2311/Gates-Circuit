@@ -408,7 +408,7 @@ function draw(){
     rect(grid[0][0] - ((width - 200)/wdg) + 10,grid[0][1] - ((width - 200)/wdg) + 10,grid[grid.length - 1][0] - grid[0][0] + 2*((width - 200)/wdg) - 20,grid[grid.length - 1][1] - grid[0][1] + 2*((width - 200)/wdg) - 20,10)
     grid.forEach(el => {
         noStroke()
-        fill(30)
+        fill(20)
         circle(el[0],el[1],4)
     });
     wires.forEach(el => {
