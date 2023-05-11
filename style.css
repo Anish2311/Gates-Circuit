@@ -29,6 +29,7 @@
     flex-direction: row;
     justify-content: left;
     cursor: pointer;
+    user-select: none;
 }
 
 .gate:hover{
