@@ -124,7 +124,7 @@ class Wire{
     }
     make(){
         this.b.forEach((e,i) => {
-            stroke(50)
+            stroke(100)
             if(this.state){
                 stroke(255,50,50)
             }
@@ -268,7 +268,7 @@ class Slot{
     }
     show(){
         noStroke()
-        fill(50)
+        fill(100)
         if(this.state){
             fill(255,50,50)
         }
@@ -305,7 +305,7 @@ class Reslot{
     }
     show(){
         noStroke()
-        fill(50)
+        fill(100)
         if(this.state){
             fill(255,50,50)
         }
@@ -330,7 +330,7 @@ class Input{
     }
     show(){
         noStroke()
-        fill(50)
+        fill(100)
         if(this.state){
             fill(255,50,50)
         }
@@ -365,7 +365,7 @@ class Output{
     }
     show(){
         noStroke()
-        fill(50)
+        fill(100)
         if(this.state){
             fill(255,50,50)
         }
@@ -403,12 +403,12 @@ function setup(){
 function draw(){
     background(0)
     noFill()
-    stroke(20)
+    stroke(40)
     strokeWeight(2)
     rect(grid[0][0] - ((width - 200)/wdg) + 10,grid[0][1] - ((width - 200)/wdg) + 10,grid[grid.length - 1][0] - grid[0][0] + 2*((width - 200)/wdg) - 20,grid[grid.length - 1][1] - grid[0][1] + 2*((width - 200)/wdg) - 20,10)
     grid.forEach(el => {
         noStroke()
-        fill(16)
+        fill(30)
         circle(el[0],el[1],4)
     });
     wires.forEach(el => {
