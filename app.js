@@ -124,7 +124,7 @@ class Wire{
     }
     make(){
         this.b.forEach((e,i) => {
-            stroke(100)
+            stroke(70)
             if(this.state){
                 stroke(255,50,50)
             }
@@ -268,7 +268,7 @@ class Slot{
     }
     show(){
         noStroke()
-        fill(100)
+        fill(70)
         if(this.state){
             fill(255,50,50)
         }
@@ -305,7 +305,7 @@ class Reslot{
     }
     show(){
         noStroke()
-        fill(100)
+        fill(70)
         if(this.state){
             fill(255,50,50)
         }
@@ -330,7 +330,7 @@ class Input{
     }
     show(){
         noStroke()
-        fill(100)
+        fill(70)
         if(this.state){
             fill(255,50,50)
         }
@@ -365,7 +365,7 @@ class Output{
     }
     show(){
         noStroke()
-        fill(100)
+        fill(70)
         if(this.state){
             fill(255,50,50)
         }
