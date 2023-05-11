@@ -1,0 +1,110 @@
+.but{
+    color: rgb(14, 126, 96);
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.but:hover{
+    scale: 1.2;
+}
+
+.but:active{
+    scale: 1;
+}
+
+.gate{
+    width: auto;
+    height: 1rem;
+    margin: 0.4rem;
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    border-radius: 0.4rem;
+    color: rgb(100, 100, 100);
+    background-color: rgb(20, 20, 20);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: large;
+    text-align:center;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    
+}
+
+.gate:hover{
+    scale: 1.1;
+}
+
+.gate:active{
+    scale: 1;
+}
+
+.input{
+    width: 4rem;
+    background-color: rgb(10,10,10);
+    border-style: solid;
+    border-color: rgb(50, 50, 50);
+    height: 1.2rem;
+    border-radius: 4px;
+    color: rgb(100, 100, 100);
+    padding: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform:uppercase;
+}
+
+canvas{
+    position: fixed;
+    bottom: 0rem;
+    z-index: -1;
+    left: 0rem;
+}
+
+.gatebuts{
+    width: 62%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-content: space-around;
+    position: fixed;
+    bottom: 0.8rem;
+    left: 12%;
+    overflow-x: scroll;
+    scrollbar-width:none;
+    background-color: rgb(8,8,8);
+    border-radius: 1rem;
+    /* scrollbar-color: rgb(10,10,10); */
+}
+
+.popup{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(10,10,10,0.9);
+    display: block;
+    align-items: center;
+    position: fixed;
+    left: 0rem;
+    top: 0rem;
+    z-index: 2;
+}
+
+.inst{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 85%;
+    background-color: rgb(15, 15, 15);
+    border-radius: 1rem;
+    padding: 1rem;
+    position: absolute;
+    left: 8rem;
+    top: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cont{
+    color: rgb(100, 100, 100);
+    
+    text-align: left;
+    width: 90%;
+}

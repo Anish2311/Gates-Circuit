@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="Logos.png">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Gates Circuit</title>
+</head>
+<body style="background-color: black;">
+    <div class="menu" id="menu">
+        <div class="but" id="inp" style="position: fixed; left: 2.4%; bottom: 2%;color: green;">
+            <ion-icon name="add-circle-outline"></ion-icon>
+        </div>
+        <div class="but" id="outp" style="position: fixed; right: 2.4%; bottom: 2%;color: green;">
+            <ion-icon name="add-circle-outline"></ion-icon>
+        </div>
+        <div style="position: fixed; right: 22%; bottom: 3.2%;">
+            <input class="input" min="32" max="64" type="range" name="" id="zoom" style="display: none; width: 2rem;">
+        </div>
+        <div style="position: fixed; right: 16%; bottom: 3.2%;">
+            <input id="txt" type="text" name="name" id="name" class="input">
+        </div>
+        <div class="but" id="create" style="position: fixed; right: 13%; bottom: 2%;">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+        </div>
+        <div class="but" id="clear" style="position: fixed; right: 10%; bottom: 2%;">
+            <ion-icon name="trash-outline"></ion-icon>
+        </div>
+        <div class="but" id="info" style="position: fixed; right: 7%; bottom: 2.4%; color: rgb(30,30,30); font-size: 1.6rem;">
+            <ion-icon name="information-circle-outline"></ion-icon>
+        </div>
+        <div class="gatebuts" id="gatebuts">
+            <div class="but" id="cut" style=" color: rgb(100,100,100); position: fixed; left: 6%; bottom: 2%;" onclick="setblock('wire','cut')">
+                <ion-icon name="cut-outline"></ion-icon>
+            </div>
+            <div class="but" id="wire" style="color: rgb(0, 210, 0); position: fixed; left: 9%; bottom: 2%;" onclick="setblock('wire','wire')">
+                <ion-icon name="git-branch-outline"></ion-icon>
+            </div>
+            <div class="gate" id="AND"  onclick="setblock([2,1,'AND'],'AND')">
+                <span>AND</span>
+            </div>
+            <div class="gate" id="NOT"  onclick="setblock([1,1,'NOT'],'NOT')">
+                <span>NOT</span>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div class="inst">
+            <ion-icon name="close-outline" id="close" class="but" style="position: absolute; right: 2.8rem; top: 2.8rem; color: rgb(100,100,100); font-size: xx-large; font-weight: 600;"></ion-icon>
+            <div class="cont">
+                <h1 style="text-align: left; position: relative; top: 0.4rem;">Welcome to Gates Circuit!!</h1>
+                <div style="position: absolute; top: 7.2rem; line-height: 1.6; width: 36%;">
+                    <p>This app is used to visualize and construct circuits using logic gates.</p>
+                    <p>This idea is inspired from a well talented YouTuber named Sebastian Lague. His videos  are really helpful for understanding how computers work. Click on the links given below to watch some of his videos for better understanding on the usage of this app.</p>
+                    <a href="https://www.youtube.com/watch?v=QZwneRb-zqA">How do computers work?</a>
+                    <p></p>
+                    <a href="https://www.youtube.com/watch?v=I0-izyq6q5s">How do computers remember?</a>
+                    <p>Read the following instructions to know how to use this app:</p>
+                    <p> > Nodes that are in the left side of the board are the input nodes.</p>
+                    <p style="margin-top: -1rem;"> > Nodes that are in the right side of the board are the output nodes.</p>
+                </div>
+                <div style="position: absolute; top: 2rem; line-height: 1.6; width: 50%; left: 44%;">
+                    
+                    <ion-icon name="add-circle-outline" style="font-size: larger; color: green; position: absolute; margin-top: 1.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Add nodes on either side of the board.</p>
+                    <ion-icon name="git-branch-outline" style="font-size: larger; color: green; position: absolute; margin-top: 0.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Draw wires on the board.</p>
+                    <ion-icon name="cut-outline" style="font-size: larger; color: green; position: absolute; margin-top: 0.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Cut existing wires on the board.</p>
+                    <ion-icon name="checkmark-done-outline" style="font-size: larger; color: green; position: absolute; margin-top: 0.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Create a GATE with the same functionality of the circuit made.</p>
+                    <ion-icon name="trash-outline" style="font-size: larger; color: green; position: absolute; margin-top: 0.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Clear the board.</p>
+                    <input class="input" type="range" style="width: 2rem; position: absolute; margin-top: 0.2rem;"><p style="margin-left: 3.2rem;"> - Zoom in and out (Only during the absence of blocks and wires).</p>
+                    <div class="gate" style="width: fit-content; position: absolute; margin-top: 0.2rem;scale: 0.8;left: -1.2rem;">
+                        <span style="position: relative; bottom: 0.2rem;">GATE NAME</span>
+                        <ion-icon name="trash-outline" class="but" style="font-size: large; position: relative; left: 0.4rem;" onclick="remblock('${id}')"></ion-icon>
+                    </div><p style="margin-left: 8rem; margin-top: 1.6rem;"> - Gates available (Can be removed from the list by deleting it).</p>
+                    <p> > Gates have nodes on 2 sides. The nodes on the left side are the input nodes for the gate and the nodes on the right side are the output nodes of the gate.</p>
+                    <p> > Wires can be extended from the input nodes of the board or from the output nodes of the blocks. They can only be connected to the receiving nodes of the block and the output nodes of the board.</p>
+                    <p> > State of the input nodes of the board can be changed by clicking on them.</p>
+                    <a href="">View my source code</a>
+                    <p>BY : Venkatesh S</p>
+                </div>
+            </div>
+            <input type="checkbox" name="" id="show" style="position: fixed; bottom: 5rem; right: 21.2rem;"><label style="font-size: small; margin-left: 2rem; position: fixed; bottom: 5rem; right: 12rem; color: rgb(123, 43, 43);">Don't show this again</label>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
