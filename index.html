@@ -53,9 +53,9 @@
     </div>
     <div class="popup" id="popup">
         <div class="inst">
-            <ion-icon name="close-outline" id="close" class="but" style="position: absolute; right: 2.8rem; top: 2.8rem; color: rgb(100,100,100); font-size: xx-large; font-weight: 600;"></ion-icon>
+            <ion-icon name="close-outline" id="close" class="but" style="position: absolute; right: 2.8rem; top: 2.8rem; color: rgb(100,100,100); font-size: xx-large; font-weight: 600; z-index: 2;"></ion-icon>
             <div class="cont">
-                <h1 style="text-align: left; position: relative; top: 0.4rem;">Welcome to Gates Circuit!!</h1>
+                <h1 style="text-align: left; position: relative; top: 0.4rem; width: inherit;">Welcome to Gates Circuit!!</h1>
                 <div style="position: absolute; top: 7.2rem; line-height: 1.6; width: 36%;">
                     <p>This app is used to visualize and construct circuits using logic gates.</p>
                     <p>This idea is inspired from a well talented YouTuber named Sebastian Lague. His videos  are really helpful for understanding how computers work. Click on the links given below to watch some of his videos for better understanding on the usage of this app.</p>
@@ -66,7 +66,7 @@
                     <p> > Nodes that are in the left side of the board are the input nodes.</p>
                     <p style="margin-top: -1rem;"> > Nodes that are in the right side of the board are the output nodes.</p>
                 </div>
-                <div style="position: absolute; top: 2rem; line-height: 1.6; width: 50%; left: 44%;">
+                <div style="position: absolute; top: 4rem; line-height: 1.6; width: 50%; left: 46%;">
                     
                     <ion-icon name="add-circle-outline" style="font-size: larger; color: green; position: absolute; margin-top: 1.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Add nodes on either side of the board.</p>
                     <ion-icon name="git-branch-outline" style="font-size: larger; color: green; position: absolute; margin-top: 0.2rem;"></ion-icon><p style="margin-left: 1.6rem;"> - Draw wires on the board.</p>
@@ -85,7 +85,7 @@
                     <p>BY : Venkatesh S</p>
                 </div>
             </div>
-            <input type="checkbox" name="" id="show" style="position: fixed; bottom: 5rem; right: 21.2rem;"><label style="font-size: small; margin-left: 2rem; position: fixed; bottom: 5rem; right: 12rem; color: rgb(255, 47, 47);">Don't show this again</label>
+            <input type="checkbox" name="" id="show" style="position: absolute; bottom: 1rem; right: 1rem;"><label style="font-size: small; margin-left: 2rem; position: absolute; bottom: 1rem; right: 2.8rem; color: rgb(255, 47, 47);">Don't show this again</label>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>

@@ -92,14 +92,14 @@ canvas{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    height: 85%;
+    width: 64%;
+    height: 80%;
     background-color: rgb(20, 20, 20);
     border-radius: 1rem;
-    padding: 1rem;
+    padding: 2rem;
     position: absolute;
-    left: 8rem;
-    top: 2rem;
+    left: 15%;
+    top: 5%;
     font-family: 'Poppins', sans-serif;
 }
 

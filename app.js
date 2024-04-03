@@ -1,6 +1,6 @@
 const zoom = document.getElementById('zoom')
-zoom.step = "8"
-zoom.value = 40
+zoom.step = "16"
+zoom.value = 32
 if(JSON.parse(localStorage.getItem('but')) != null){
     document.getElementById("gatebuts").innerHTML = JSON.parse(localStorage.getItem('but'))
 }
@@ -10,11 +10,11 @@ let inputs = []
 let outputs = []
 let grid = []
 let tgr = []
-let rad = 10
+let rad = 15
 let f = false
 let s = false
 let inp = false
-let wdg = 40
+let wdg = 32
 let hig = wdg/2
 let temp = []
 let names = ['AND','NOT']
@@ -142,18 +142,17 @@ class Wire{
         if(this.flag){
             grid.forEach(e => {
                 let z = true
-                if((this.b.length == 0 && abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 120)/hig)/2 && abs(this.x - e[0]) <= ((width - 200)/wdg)*2 && this.y == e[1]) || (abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 120)/hig)/2 && (abs(this.x - e[0]) == ((width - 200)/wdg) || abs(this.x - e[0]) == 0) && (abs(this.y - e[1]) == ((height - 120)/hig) || abs(this.y - e[1]) == 0))){
+                if((this.b.length == 0 && abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 180)/hig)/2 && abs(this.x - e[0]) <= 80 && this.y == e[1]) || (abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 180)/hig)/2 && (abs(this.x - e[0]) == ((width - 200)/wdg) || abs(this.x - e[0]) == 0) && (abs(this.y - e[1]) == ((height - 180)/hig) || abs(this.y - e[1]) == 0))){
                     this.b.forEach(el => {
                         if(e[0] == el[0] && e[1] == el[1]){
                             z = false
                         }
                     });
                     if(z){
-                        if((this.x != e[0] || this.y != e[1]) && (abs(this.x - e[0]) != (width - 200)/wdg || abs(this.y - e[1]) != (height - 120)/hig) && (tgr.includes(`${e[0]},${e[1]}`) == false || slotsxy.includes(`${e[0]},${e[1]}`) == true)){
+                        if((this.x != e[0] || this.y != e[1]) && (abs(this.x - e[0]) != (width - 200)/wdg || abs(this.y - e[1]) != (height - 180)/hig) && (tgr.includes(`${e[0]},${e[1]}`) == false || slotsxy.includes(`${e[0]},${e[1]}`) == true)){
                             this.b.push([this.x,this.y,e[0],e[1]])
                             this.x = e[0]
                             this.y = e[1]
-                            console.log('REACHED');
                         }
                     }
                 }
@@ -179,11 +178,11 @@ class Block{
             this.wdth = 2
         }
         for(let i = 0; i < sl; i++){
-            this.slots.push(new Slot(this.x,this.y + i*(height - 120)/hig))
-            slotsxy.push(`${this.x},${this.y + i*(height - 120)/hig}`)
+            this.slots.push(new Slot(this.x,this.y + i*(height - 180)/hig))
+            slotsxy.push(`${this.x},${this.y + i*(height - 180)/hig}`)
         }
         for(let i = 0; i < re; i++){
-            this.res.push(new Reslot(this.x + (((width - 200)/wdg) * this.wdth),this.y + i*(height - 120)/hig))
+            this.res.push(new Reslot(this.x + (((width - 200)/wdg) * this.wdth),this.y + i*(height - 180)/hig))
         }
         this.t = tv
         this.func = func
@@ -226,7 +225,7 @@ class Block{
     show(){
         fill(col[names.indexOf(this.t)%8])
         noStroke()
-        rect(this.x,this.y - (50 / (wdg/8)),((width - 200)/wdg) * this.wdth,(this.slots.length - 1)*(height - 120)/hig + 2*(50 / (wdg/8)),(50 / (wdg/8)))
+        rect(this.x,this.y - (50 / (wdg/8)),((width - 200)/wdg) * this.wdth,(this.slots.length - 1)*(height - 180)/hig + 2*(50 / (wdg/8)),(50 / (wdg/8)))
         // strokeWeight(4)
         fill(255)
         textSize(12 - ((zoom.value - 32)/8))
@@ -234,7 +233,7 @@ class Block{
             textSize(10 * 1)
         ]
         textAlign(CENTER, CENTER)
-        text(this.t,this.x + (((width - 200)/wdg) * this.wdth)/2,this.y + (this.slots.length - 1)*(height - 120)/hig/2)
+        text(this.t,this.x + (((width - 200)/wdg) * this.wdth)/2,this.y + (this.slots.length - 1)*(height - 180)/hig/2)
         this.slots.forEach(el => {
             el.show()
             el.update()
@@ -390,14 +389,16 @@ class Output{
 }
 
 function setup(){
-    createCanvas(1520,690)
+    let w = window.innerWidth
+    let h = window.innerHeight
+    createCanvas(w,h)
     for(let i = 0; i < wdg; i++){
         for(let j = 0; j < hig; j++){
-            grid.push([i*((width - 200)/wdg) + 120,j*((height - 120)/hig) + 40])
+            grid.push([i*((width - 200)/wdg) + 120,j*((height - 180)/hig) + 80])
         }
     }
-    inputs.push(new Input(grid[0][0] - 2*((width - 200)/wdg),grid[0][1]))
-    outputs.push(new Output(grid[grid.length - 1][0] + 2*((width - 200)/wdg),grid[0][1]))
+    inputs.push(new Input(40,grid[0][1]))
+    outputs.push(new Output(width - 40,grid[0][1]))
 }
 
 function draw(){
@@ -405,7 +406,7 @@ function draw(){
     noFill()
     stroke(40)
     strokeWeight(2)
-    rect(grid[0][0] - ((width - 200)/wdg) + 10,grid[0][1] - ((width - 200)/wdg) + 10,grid[grid.length - 1][0] - grid[0][0] + 2*((width - 200)/wdg) - 20,grid[grid.length - 1][1] - grid[0][1] + 2*((width - 200)/wdg) - 20,10)
+    rect(80,40,width - 160,height - 140,10)
     grid.forEach(el => {
         noStroke()
         fill(20)
@@ -441,7 +442,7 @@ function mousePressed(){
     let x = null;
     let y = null;
     grid.forEach(e => {
-        if(abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 120)/hig)/2){
+        if(abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 180)/hig)/2){
             x = e[0]
             y = e[1]
         }
@@ -456,24 +457,24 @@ function mousePressed(){
                 }
                 let mnm = Math.max(k[0],k[1])
                 for(let i = 0; i < mnm; i++){
-                    if(tgr.includes(`${x},${y + i*(height - 120)/hig}`) == true || x > grid[grid.length - 1][0] || x < grid[0][0] || (y + i*(height - 120)/hig) > grid[grid.length - 1][1] || (y + i*(height - 120)/hig) < grid[0][1]){
+                    if(tgr.includes(`${x},${y + i*(height - 180)/hig}`) == true || x > grid[grid.length - 1][0] || x < grid[0][0] || (y + i*(height - 180)/hig) > grid[grid.length - 1][1] || (y + i*(height - 180)/hig) < grid[0][1]){
                         app = false
                     }
                 }
                 for(let i = 0; i < mnm; i++){
                     for(let j = 1; j < wdth + 1; j++){
-                        if(tgr.includes(`${x + (((width - 200)/wdg) * j)},${y + i*(height - 120)/hig}`) == true || (x + (((width - 200)/wdg) * j)) > grid[grid.length - 1][0] || (x + (((width - 200)/wdg) * j)) < grid[0][0] || (y + i*(height - 120)/hig) > grid[grid.length - 1][1] || (y + i*(height - 120)/hig) < grid[0][1]){
+                        if(tgr.includes(`${x + (((width - 200)/wdg) * j)},${y + i*(height - 180)/hig}`) == true || (x + (((width - 200)/wdg) * j)) > grid[grid.length - 1][0] || (x + (((width - 200)/wdg) * j)) < grid[0][0] || (y + i*(height - 180)/hig) > grid[grid.length - 1][1] || (y + i*(height - 180)/hig) < grid[0][1]){
                             app = false
                         }
                     }
                 }
                 if(app){
                     for(let i = 0; i < mnm; i++){
-                        tgr.push(`${x},${y + i*(height - 120)/hig}`)
+                        tgr.push(`${x},${y + i*(height - 180)/hig}`)
                     }
                     for(let i = 0; i < mnm; i++){
                         for(let j = 1; j < wdth + 1; j++){
-                            tgr.push(`${x + (((width - 200)/wdg) * j)},${y + i*(height - 120)/hig}`)
+                            tgr.push(`${x + (((width - 200)/wdg) * j)},${y + i*(height - 180)/hig}`)
                         }
                     }
                     blocks.push(new Block(x,y,k[0],k[1],k[2],t))
@@ -580,7 +581,7 @@ function mouseReleased(){
         let x = null;
         let y = null;
         grid.forEach(e => {
-            if(abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 120)/hig)/2){
+            if(abs(mouseX - e[0]) <= ((width - 200)/wdg)/2 && abs(mouseY - e[1]) <= ((height - 180)/hig)/2){
                 x = e[0]
                 y = e[1]
             }
@@ -604,7 +605,7 @@ function mouseReleased(){
             });
         });
         outputs.forEach((el) => {
-            if(mouseX > el.x - (el.r)/2 && mouseX < el.x + (el.r)/2 && mouseY > el.y - (el.r)/2 && mouseY < el.y + (el.r)/2 && abs(el.x - wires[wires.length - 1].x) == ((width - 200)/wdg)*2 && el.y == wires[wires.length - 1].y){
+            if(mouseX > el.x - (el.r)/2 && mouseX < el.x + (el.r)/2 && mouseY > el.y - (el.r)/2 && mouseY < el.y + (el.r)/2 && el.y == wires[wires.length - 1].y){
                 wires[wires.length - 1].set(el.x,el.y)
                 s = true
                 el.wires.push(wires[wires.length - 1])
@@ -629,13 +630,13 @@ function arcGen(a,b){
         if(b[2] - b[0] > 0){    //RIGHT
             angleMode(DEGREES)
             arc(b[0] + rad, b[1] + rad,rad * 2,rad * 2,180,270)
-            a[3] = a[1] - (height - 120)/hig + rad
+            a[3] = a[1] - (height - 180)/hig + rad
             line(b[0] + rad,b[1],b[2],b[3])
         }
         else if(b[2] - b[0] < 0){    //LEFT
             angleMode(DEGREES)
             arc(b[0] - rad, b[1] + rad,rad * 2,rad * 2,270,0)
-            a[3] = a[1] - (height - 120)/hig + rad
+            a[3] = a[1] - (height - 180)/hig + rad
             line(b[0] - rad,b[1],b[2],b[3])
         }
         else if(b[2] == b[0]){
@@ -646,13 +647,13 @@ function arcGen(a,b){
         if(b[2] - b[0] > 0){    //RIGHT
             angleMode(DEGREES)
             arc(b[0] + rad, b[1] - rad,rad * 2,rad * 2,90,180)
-            a[3] = a[1] + (height - 120)/hig - rad
+            a[3] = a[1] + (height - 180)/hig - rad
             line(b[0] + rad,b[1],b[2],b[3])
         }
         else if(b[2] - b[0] < 0){    //LEFT
             angleMode(DEGREES)
             arc(b[0] - rad, b[1] - rad,rad * 2,rad * 2,0,90)
-            a[3] = a[1] + (height - 120)/hig - rad
+            a[3] = a[1] + (height - 180)/hig - rad
             line(b[0] - rad,b[1],b[2],b[3])
         }
         else if(b[2] == b[0]){
@@ -681,7 +682,7 @@ function arcGen(a,b){
             angleMode(DEGREES)
             arc(b[0] - rad, b[1] - rad,rad * 2,rad * 2,0,90)
             if(a[0] < grid[0][0]){
-                a[2] = a[0] + 2*(width - 200)/wdg - rad
+                a[2] = a[0] + 80 - rad
             }
             else{
                 a[2] = a[0] + (width - 200)/wdg - rad
@@ -692,7 +693,7 @@ function arcGen(a,b){
             angleMode(DEGREES)
             arc(b[0] - rad, b[1] + rad,rad * 2,rad * 2,270,0)
             if(a[0] < grid[0][0]){
-                a[2] = a[0] + 2*(width - 200)/wdg - rad
+                a[2] = a[0] + 80 - rad
             }
             else{
                 a[2] = a[0] + (width - 200)/wdg - rad
@@ -772,13 +773,13 @@ function creating(func,slots){
 
 inb.addEventListener('click',() => {
     if(inputs.length < hig){
-        inputs.push(new Input(grid[0][0] - 2*((width - 200)/wdg),inputs.length * (height - 120)/hig + 40))
+        inputs.push(new Input(40,inputs.length * (height - 180)/hig + 80))
     }
 })
 
 outb.addEventListener('click',() => {
     if(outputs.length < hig){
-        outputs.push(new Output(grid[grid.length - 1][0] + 2*((width - 200)/wdg),outputs.length * (height - 120)/hig + 40))
+        outputs.push(new Output(width - 40,outputs.length * (height - 180)/hig + 80))
     }
 })
 
@@ -847,8 +848,8 @@ create.addEventListener('click',() => {
         inputs = []
         outputs = []
         tgr = []
-        inputs.push(new Input(grid[0][0] - 2*((width - 200)/wdg),grid[0][1]))
-        outputs.push(new Output(grid[grid.length - 1][0] + 2*((width - 200)/wdg),grid[0][1]))
+        inputs.push(new Input(40,grid[0][1]))
+        outputs.push(new Output(width - 40,grid[0][1]))
         gb = document.getElementById("gatebuts").childNodes
         txt.value = ''
         console.log(gb);
@@ -867,8 +868,8 @@ clear.addEventListener('click',() => {
     inputs = []
     outputs = []
     tgr = []
-    inputs.push(new Input(grid[0][0] - 2*((width - 200)/wdg),grid[0][1]))
-    outputs.push(new Output(grid[grid.length - 1][0] + 2*((width - 200)/wdg),grid[0][1]))
+    inputs.push(new Input(40,grid[0][1]))
+    outputs.push(new Output(width - 40,grid[0][1]))
 })
 
 txt.addEventListener('change',() => {
@@ -880,20 +881,21 @@ zoom.addEventListener('change',() => {
         wdg = zoom.value
         hig = wdg/2
     }
+    rad = map(wdg,32,64,15,9)
     grid = []
     for(let i = 0; i < wdg; i++){
         for(let j = 0; j < hig; j++){
-            grid.push([i*((width - 200)/wdg) + 120,j*((height - 120)/hig) + 40])
+            grid.push([i*((width - 200)/wdg) + 120,j*((height - 180)/hig) + 80])
         }
     }
     inputs.forEach((e,i) => {
-        e.x = grid[0][0] - 2*((width - 200)/wdg)
-        e.y = i * ((height - 120)/hig) + grid[0][1]
+        // e.x = grid[0][0] - 2*((width - 200)/wdg)
+        e.y = i * ((height - 180)/hig) + grid[0][1]
         e.r = 120 / (wdg/8)
     });
     outputs.forEach((e,i) => {
-        e.x = grid[grid.length - 1][0] + 2*((width - 200)/wdg)
-        e.y = i * ((height - 120)/hig) + grid[0][1]
+        // e.x = grid[grid.length - 1][0] + 2*((width - 200)/wdg)
+        e.y = i * ((height - 180)/hig) + grid[0][1]
         e.r = 120 / (wdg/8)
     });
     blocks.forEach(el => {
